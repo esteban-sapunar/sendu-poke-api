@@ -14,15 +14,21 @@ class V1::PokemonsController < ApplicationController
   def create
     @pokemon = Pokemon.new(pokemon_params)
 
-    @pokemon.save
-    render json: @pokemon, status: :created
+    if @pokemon.save
+      render json: @pokemon, status: :created
+    else
+      head(:unprocessable_entity)
+    end
   end
 
   def update 
     @pokemon = Pokemon.find(params[:id])
-    @pokemon.update(pokemon_params)
-
-    render json: @pokemon, status: :ok
+    
+    if @pokemon.update(pokemon_params)
+      render json: @pokemon, status: :ok
+    else
+      head(:unprocessable_entity)
+    end
   end
 
   def destroy

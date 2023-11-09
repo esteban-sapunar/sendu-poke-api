@@ -21,8 +21,9 @@
   ```ruby
       rails spec
   ```
+  5. Api documentation available in local server when the project is running. [http://localhost:3000/api-docs/](http://localhost:3000/api-docs/index.html)
 
-  ## API Endpoints ##
+## API Endpoints ##
 
 The API provides the following basic CRUD endpoints for managing Pokemon entities:
 

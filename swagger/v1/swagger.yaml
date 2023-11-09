@@ -1,0 +1,165 @@
+---
+openapi: 3.0.1
+info:
+  title: Sendu Poke API
+  version: v1
+paths:
+  "/v1/pokemons":
+    get:
+      summary: List pokemons
+      tags:
+      - Pokemons
+      description: Lists all pokemons in the database
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/pokemon"
+    post:
+      summary: Create pokemon
+      tags:
+      - Pokemons
+      description: Creates a new pokemon in the database
+      parameters: []
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  order:
+                    type: integer
+                  base_experience:
+                    type: integer
+                  height:
+                    type: integer
+                  weight:
+                    type: integer
+                  types:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/pokemon_data"
+  "/v1/pokemons/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show pokemon
+      tags:
+      - Pokemons
+      description: Shows a pokemon from the database by id
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  order:
+                    type: integer
+                  base_experience:
+                    type: integer
+                  height:
+                    type: integer
+                  weight:
+                    type: integer
+                  types:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+    patch:
+      summary: Update pokemon
+      tags:
+      - Pokemons
+      description: Updates a pokemon from the database by id
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/pokemon_data"
+    delete:
+      summary: Delete pokemon
+      tags:
+      - Pokemons
+      description: Deletes a pokemon from the database by id
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  schemas:
+    pokemon:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        order:
+          type: integer
+        base_experience:
+          type: integer
+        height:
+          type: integer
+        weight:
+          type: integer
+        types:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    pokemon_data:
+      type: object
+      properties:
+        pokemon:
+          type: object
+          properties:
+            name:
+              type: string
+            order:
+              type: integer
+            base_experience:
+              type: integer
+            height:
+              type: integer
+            weight:
+              type: integer
+            types:
+              type: string
